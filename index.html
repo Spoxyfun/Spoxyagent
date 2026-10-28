@@ -273,7 +273,7 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
   <div class="sec-k">02 · WALLET</div>
   <h2 data-i="walletH">Mint with wallet — Binance Agent ID required</h2>
   <div class="panel">
-    <div class="contract"><span data-i="contract">Contract</span>: <b>0x0000…0000</b> <span data-i="placeholder">(placeholder, set at launch)</span></div>
+    <div class="contract"><span data-i="contract">Contract</span>: <b>0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee</b> <span data-i="placeholder">(live on BNB Chain)</span></div>
     <div class="gate" data-i="walletGate">Wallet alone is not enough. This path is also locked to Binance Agent ID only — without a valid Binance Agent ID, wallet connection and minting stay blocked. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint.</div>
     <label class="lab" for="binanceIdW" data-i="binanceLab">Binance Agent ID — required to mint</label>
     <input type="text" id="binanceIdW" placeholder="Enter your Binance Agent ID" autocomplete="off" spellcheck="false">
@@ -352,7 +352,7 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
       <button class="btn small ghost" onclick="downloadAllMetadata()" data-i="metaDlAll">DOWNLOAD ALL 5,000 JSON</button>
       <button class="btn small ghost" onclick="downloadCollectionJSON()" data-i="metaDlColl">DOWNLOAD COLLECTION JSON</button>
     </div>
-    <div class="note" data-i="metaNote">The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract address is still the placeholder until launch, so set tokenURI / baseURI in the contract at deploy time.</div>
+    <div class="note" data-i="metaNote">The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract is live on BNB Chain at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee.</div>
     <div class="mstatus" id="metaDlStatus"></div>
   </div>
 </section>
@@ -944,7 +944,7 @@ var qty={a:1,w:1}, pLang='en', pay='BNB', payAgent='BNB';
    5,000 supply mint FREE; every mint after that costs 0.00025 BNB.
    MINTED mirrors the progress bar on this static page (0 / 5,000), so the
    free window is fully open: 100 of 100 free mints remain. */
-var SUPPLY_TOTAL = 5000, MINTED_COUNT = 0, FREE_SUPPLY = 100, PRICE_BNB = 0.00025, MAX_PER_WALLET = 2;
+var SUPPLY_TOTAL = 5000, MINTED_COUNT = 44, FREE_SUPPLY = 100, PRICE_BNB = 0.00025, MAX_PER_WALLET = 2;
 function freeLeft(){ return Math.max(0, FREE_SUPPLY - MINTED_COUNT); }
 function mintCost(q){
   var f = Math.min(q, freeLeft()), p = q - f;
@@ -1053,7 +1053,7 @@ function writePrompt(){
       "",
       "步骤：",
       "1. 验证上面的币安 Agent ID 并确认铸造已开启；如果尚未开启，请停止并报告。",
-      "2. 使用该币安 Agent ID 在合约 0x0000…0000 上调用 mint("+q+")，并发送上面价格行中的价值。",
+      "2. 使用该币安 Agent ID 在合约 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee 上调用 mint("+q+")，并发送上面价格行中的价值。",
       "3. Gas：自行将铸造交易的 Gas 上限设置为 900000；不要依赖自动估算。未使用的 Gas 不收费。",
       "4. 等待交易被打包。交易的 Minted 事件会给出第一个代币 ID 和数量。",
       "5. 从下一个区块开始（约半秒后），tokenURI(id) 会返回每个代币的元数据、图片和链上特征。",
@@ -1073,7 +1073,7 @@ function writePrompt(){
       "",
       "Steps:",
       "1. Verify the Binance Agent ID above and check that minting is open; if it is not open, stop and report back.",
-      "2. Call mint("+q+") on contract 0x0000…0000 using that Binance Agent ID, sending the value from the price line above.",
+      "2. Call mint("+q+") on contract 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee using that Binance Agent ID, sending the value from the price line above.",
       "3. Gas: set the mint transaction's gas limit yourself to 900000; do not rely on automatic estimation. Gas you do not use is not charged.",
       "4. Wait for it to be mined. The transaction's Minted event gives the first token id and the quantity.",
       "5. From the next block (about half a second later), tokenURI(id) returns each token's metadata, its picture and traits on chain.",
@@ -1118,7 +1118,7 @@ var I18N = {
     heroSub:"5,000 pixel AI agents, each assembled from 8 trait layers and checked for duplicates. Art and metadata live fully on-chain on BNB Chain. Minting is only possible with a Binance Agent ID — no Binance Agent ID, no mint. The first 100 of the supply mint FREE with a Binance Agent ID; after those 100 are gone, minting costs 0.00025 BNB per mint.",
     agentH:"Mint via your AI agent",agentSub:"No separate wallet step here, the way agent minting works on the reference flow: choose how many, choose how to pay, enter your Binance Agent ID, then send the prompt below to an AI agent whose wallet holds that Binance Agent ID — it mints from its own wallet. The first 100 of the supply are FREE; after that, each mint costs 0.00025 BNB.",
     qty:"Quantity",payBnbSub:"FREE for the first 100 supply, then 0.00025 BNB each",payUsdtSub:"FREE for the first 100 supply, then the USDT equivalent of 0.00025 BNB each",binanceLab:"Binance Agent ID — required to mint",binanceHint:"Use the Binance Agent ID linked to your agent wallet. Wallet-only minting without a Binance Agent ID is not allowed.",binancePh:"Enter your Binance Agent ID",promptLang:"Prompt language",copy:"COPY PROMPT",agentNote:"Mint isn't live yet — and when it opens, only a valid Binance Agent ID can mint: free for the first 100 supply, then 0.00025 BNB per mint, max 2 per wallet. Copy Prompt stays blocked until a valid Binance Agent ID is entered.",
-    walletH:"Mint with wallet — Binance Agent ID required",walletGate:"Wallet alone is not enough. This path is also locked to Binance Agent ID only — without a valid Binance Agent ID, wallet connection and minting stay blocked. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint.",contract:"Contract",placeholder:"(placeholder, set at launch)",payIn:"Pay in",connect:"CONNECT WALLET",mintSoon:"MINT OPENS SOON",gasNote:"Even with a connected wallet, a mint is rejected unless it carries a valid Binance Agent ID. Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.",
+    walletH:"Mint with wallet — Binance Agent ID required",walletGate:"Wallet alone is not enough. This path is also locked to Binance Agent ID only — without a valid Binance Agent ID, wallet connection and minting stay blocked. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint.",contract:"Contract",placeholder:"(live on BNB Chain)",payIn:"Pay in",connect:"CONNECT WALLET",mintSoon:"MINT OPENS SOON",gasNote:"Even with a connected wallet, a mint is rejected unless it carries a valid Binance Agent ID. Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.",
     traitsH:"Stacked from 8 layers",traitsSub:"Every agent is stacked from 8 layers into 5,000 unique combos. Rarity tiers by rank:",rarest:"Rarest preview",
     galleryH:"Browse all 5,000 agents",
     gallerySub:"Search by agent number, filter by rarity, and load more to explore the full collection of 5,000.",
@@ -1128,12 +1128,12 @@ var I18N = {
     metaSub:"Every agent now has standard ERC-721 JSON: name, description, image URI, and 10 attributes — the 8 traits plus Rarity and Rank. Open any agent to preview and download its file, or download the full set below.",
     metaStandard:"STANDARD",metaImageUri:"IMAGE URI PATTERN",metaUri:"METADATA URI PATTERN",metaExample:"EXAMPLE — AGENTIC SPOXY #21",
     metaDl21:"DOWNLOAD #21 JSON",metaDlAll:"DOWNLOAD ALL 5,000 JSON",metaDlColl:"DOWNLOAD COLLECTION JSON",
-    metaNote:"The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract address is still the placeholder until launch, so set tokenURI / baseURI in the contract at deploy time."},
+    metaNote:"The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract is live on BNB Chain at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee."},
   zh:{navMint:"铸造",navPrompt:"提示词",navTraits:"特征",navGallery:"画廊",minted:"已铸造",opensSoon:"铸造即将开启",chipFree:"前100个供应免费",chipPaid:"之后每次铸造 0.00025 BNB",chipBinance:"必须使用币安 Agent ID",chipMax:"每个钱包最多2个",chipReveal:"铸造后逐区块揭示",freeLab:"免费铸造窗口 — 前100个供应，仅限币安 Agent ID",freeLeft:"剩余免费名额",thenPrice:"之后每次铸造 0.00025 BNB",
     heroSub:"5,000个像素AI智能体，每个由8层特征组装并经过去重检查。艺术品和元数据完全上链于BNB Chain。只能使用币安 Agent ID 铸造——没有币安 Agent ID，就无法铸造。前100个供应使用币安 Agent ID 免费铸造；这100个用完后，每次铸造费用为 0.00025 BNB。",
     agentH:"通过你的AI智能体铸造",agentSub:"这里没有单独的钱包步骤，与参考流程中的智能体铸造方式相同：选择数量，选择支付方式，输入你的币安 Agent ID，然后将下面的提示词发送给钱包持有该币安 Agent ID 的AI智能体——它会从自己的钱包铸造。前100个供应免费；之后每次铸造费用为 0.00025 BNB。",
     qty:"数量",payBnbSub:"前100个供应免费，之后每个 0.00025 BNB",payUsdtSub:"前100个供应免费，之后每个相当于 0.00025 BNB 的 USDT",binanceLab:"币安 Agent ID — 铸造必填",binanceHint:"使用与你的智能体钱包关联的币安 Agent ID。不允许仅使用钱包而没有币安 Agent ID 进行铸造。",binancePh:"输入你的币安 Agent ID",promptLang:"提示词语言",copy:"复制提示词",agentNote:"铸造尚未上线——上线后，只有有效的币安 Agent ID 才能铸造：前100个供应免费，之后每次铸造 0.00025 BNB，每个钱包最多2个。在输入有效的币安 Agent ID 之前，复制提示词按钮将保持锁定。",
-    walletH:"使用钱包铸造 — 必须使用币安 Agent ID",walletGate:"仅有钱包是不够的。此路径同样仅限币安 Agent ID——没有有效的币安 Agent ID，钱包连接和铸造将保持锁定。价格与智能体路径相同：前100个供应免费铸造，之后每次铸造 0.00025 BNB。",contract:"合约",placeholder:"(占位符，上线时设置)",payIn:"支付方式",connect:"连接钱包",mintSoon:"铸造即将开启",gasNote:"即使钱包已连接，如果没有携带有效的币安 Agent ID，铸造也会被拒绝。免费铸造（前100个供应）发送0价值；付费铸造每次正好发送 0.00025 BNB。你的钱包将请求 900,000 的 Gas 上限；你只需支付实际使用的 Gas。",
+    walletH:"使用钱包铸造 — 必须使用币安 Agent ID",walletGate:"仅有钱包是不够的。此路径同样仅限币安 Agent ID——没有有效的币安 Agent ID，钱包连接和铸造将保持锁定。价格与智能体路径相同：前100个供应免费铸造，之后每次铸造 0.00025 BNB。",contract:"合约",placeholder:"(已在 BNB Chain 上线)",payIn:"支付方式",connect:"连接钱包",mintSoon:"铸造即将开启",gasNote:"即使钱包已连接，如果没有携带有效的币安 Agent ID，铸造也会被拒绝。免费铸造（前100个供应）发送0价值；付费铸造每次正好发送 0.00025 BNB。你的钱包将请求 900,000 的 Gas 上限；你只需支付实际使用的 Gas。",
     traitsH:"由8层堆叠而成",traitsSub:"每个智能体由8层堆叠成5,000种独特组合。按排名划分的稀有度等级：",rarest:"最稀有预览",
     galleryH:"浏览全部 5,000 个智能体",
     gallerySub:"按智能体编号搜索，按稀有度筛选，并加载更多以探索完整的 5,000 个收藏。",
